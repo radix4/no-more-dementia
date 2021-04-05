@@ -1,16 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
-   <children>
-      <Text layoutX="117.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This is a test" wrappingWidth="399.0">
-         <font>
-            <Font size="53.0" />
-         </font>
-      </Text>
-   </children>
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <AnchorPane prefHeight="700.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="700.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/registration.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #ECECE7;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="62.0" layoutY="230.0" text="Name" />
+            <Label layoutX="63.0" layoutY="280.0" text="Email" />
+            <Label layoutX="63.0" layoutY="332.0" text="Password" />
+            <Label layoutX="63.0" layoutY="381.0" text="Confirm Password" />
+            <PasswordField layoutX="180.0" layoutY="327.0" promptText="Password" />
+            <PasswordField layoutX="180.0" layoutY="376.0" promptText="Confirm Password" />
+            <TextField layoutX="180.0" layoutY="225.0" promptText="Name" />
+            <TextField layoutX="180.0" layoutY="275.0" promptText="Email" />
+            <Button layoutX="278.0" layoutY="424.0" mnemonicParsing="false" style="-fx-background-color: #15b9cf;" text="Register" />
+            <Text layoutX="60.0" layoutY="492.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Already registered?" />
+            <Text fill="#2289ff" layoutX="61.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login here" />
+            <Text layoutX="87.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Text>
+            <Text fill="#d02b2b" layoutX="89.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error! Please fill out all fields.">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
