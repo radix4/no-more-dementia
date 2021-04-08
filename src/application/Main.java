@@ -11,11 +11,15 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("layout/login.fxml"));
+			Parent loginRoot = FXMLLoader.load(getClass().getResource("layout/login.fxml"));
+			Parent registrationRoot = FXMLLoader.load(getClass().getResource("layout/login.fxml"));
 
-			Scene scene = new Scene(root,1000,700);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
+			Scene login = new Scene(loginRoot,1000,700);
+			Scene registration = new Scene(registrationRoot,1000,700);
+
+
+
+			primaryStage.setScene(login);
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
