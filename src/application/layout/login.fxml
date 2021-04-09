@@ -38,7 +38,7 @@
             <PasswordField fx:id="loginPassFPassword" layoutX="152.0" layoutY="338.0" promptText="Password" />
             <Button fx:id="btnLogin" layoutX="264.0" layoutY="387.0" mnemonicParsing="false" onAction="#handleBtnLogin" style="-fx-background-color: #15b9cf;" text="Login" />
             <Text layoutX="66.0" layoutY="499.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an account?" />
-            <Text fx:id="LoginTxtRegister" fill="#0493eb" layoutX="66.0" layoutY="522.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Register now" />
+            <Text fx:id="txtRegisterLink" fill="#0493eb" layoutX="66.0" layoutY="522.0" onMouseClicked="#handleTxtRegisterLink" strokeType="OUTSIDE" strokeWidth="0.0" text="Register now" />
             <Text layoutX="65.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No More Dementia!">
                <font>
                   <Font name="System Italic" size="35.0" />

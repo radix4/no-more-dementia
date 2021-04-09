@@ -36,7 +36,7 @@
             <TextField fx:id="txtFdEmail" layoutX="180.0" layoutY="275.0" promptText="Email" />
             <Button fx:id="btnRegister" layoutX="278.0" layoutY="424.0" mnemonicParsing="false" onAction="#handleBtnRegister" style="-fx-background-color: #15b9cf;" text="Register" />
             <Text layoutX="60.0" layoutY="492.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Already registered?" />
-            <Text fx:id="txtLoginLink" fill="#2289ff" layoutX="61.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login here" />
+            <Text fx:id="txtLoginLink" fill="#2289ff" layoutX="61.0" layoutY="518.0" onMouseClicked="#handleTxtLoginLink" strokeType="OUTSIDE" strokeWidth="0.0" text="Login here" />
             <Text layoutX="87.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration">
                <font>
                   <Font size="45.0" />
