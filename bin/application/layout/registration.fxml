@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.RegistrationController">
    <left>
       <AnchorPane prefHeight="700.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -30,19 +30,19 @@
             <Label layoutX="63.0" layoutY="280.0" text="Email" />
             <Label layoutX="63.0" layoutY="332.0" text="Password" />
             <Label layoutX="63.0" layoutY="381.0" text="Confirm Password" />
-            <PasswordField fx:id="registrationPFPassword" layoutX="180.0" layoutY="327.0" promptText="Password" />
-            <PasswordField fx:id="registrationPFConfirmPassword" layoutX="180.0" layoutY="376.0" promptText="Confirm Password" />
-            <TextField fx:id="registrationTxtFName" layoutX="180.0" layoutY="225.0" promptText="Name" />
-            <TextField fx:id="registrationTxtFEmail" layoutX="180.0" layoutY="275.0" promptText="Email" />
-            <Button fx:id="registrationBtnRegister" layoutX="278.0" layoutY="424.0" mnemonicParsing="false" style="-fx-background-color: #15b9cf;" text="Register" />
+            <PasswordField fx:id="pwFdPassword" layoutX="180.0" layoutY="327.0" promptText="Password" />
+            <PasswordField fx:id="pwFdConfirmPassword" layoutX="180.0" layoutY="376.0" promptText="Confirm Password" />
+            <TextField fx:id="txtFdName" layoutX="180.0" layoutY="225.0" promptText="Name" />
+            <TextField fx:id="txtFdEmail" layoutX="180.0" layoutY="275.0" promptText="Email" />
+            <Button fx:id="btnRegister" layoutX="278.0" layoutY="424.0" mnemonicParsing="false" onAction="#handleBtnRegister" style="-fx-background-color: #15b9cf;" text="Register" />
             <Text layoutX="60.0" layoutY="492.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Already registered?" />
-            <Text fx:id="RegistrationTxtLogin" fill="#2289ff" layoutX="61.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login here" />
+            <Text fx:id="txtLoginLink" fill="#2289ff" layoutX="61.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login here" />
             <Text layoutX="87.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration">
                <font>
                   <Font size="45.0" />
                </font>
             </Text>
-            <Text fill="#d02b2b" layoutX="89.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error! Please fill out all fields.">
+            <Text fx:id="txtErrorMsg" fill="#d02b2b" layoutX="89.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font size="20.0" />
                </font>

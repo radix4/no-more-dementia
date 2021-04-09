@@ -12,14 +12,14 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			Parent loginRoot = FXMLLoader.load(getClass().getResource("layout/login.fxml"));
-			Parent registrationRoot = FXMLLoader.load(getClass().getResource("layout/login.fxml"));
+			Parent registrationRoot = FXMLLoader.load(getClass().getResource("layout/registration.fxml"));
 
 			Scene login = new Scene(loginRoot,1000,700);
 			Scene registration = new Scene(registrationRoot,1000,700);
 
 
 
-			primaryStage.setScene(login);
+			primaryStage.setScene(registration);
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
