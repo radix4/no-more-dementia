@@ -2,36 +2,11 @@ package application;
 	
 import application.controllers.LoginController;
 import application.controllers.RegistrationController;
-import application.controllers.ScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-
-// getting loader and a pane for the first scene.
-// loader will then give a possibility to get related controller
-//              FXMLLoader firstPaneLoader = new FXMLLoader(getClass().getResource("firstLayout.fxml"));
-// 				Parent firstPane = firstPaneLoader.load();
-// 				Scene firstScene = new Scene(firstPane, 300, 275);
-//
-// 				// getting loader and a pane for the second scene
-// 				FXMLLoader secondPageLoader = new FXMLLoader(getClass().getResource("secondLayout.fxml"));
-// 				Parent secondPane = secondPageLoader.load();
-// 				Scene secondScene = new Scene(secondPane, 300, 275);
-//
-// 				// injecting second scene into the controller of the first scene
-// 				FirstController firstPaneController = (FirstController) firstPaneLoader.getController();
-// 				firstPaneController.setSecondScene(secondScene);
-//
-// 				// injecting first scene into the controller of the second scene
-// 				SecondController secondPaneController = (SecondController) secondPageLoader.getController();
-// 				secondPaneController.setFirstScene(firstScene);
-//
-// 				primaryStage.setTitle("Switching scenes");
-// 				primaryStage.setScene(firstScene);
-// 				primaryStage.show();
-
 
 public class Main extends Application {
 	@Override

@@ -13,8 +13,6 @@ import javafx.stage.Stage;
 public class LoginController {
 
     @FXML
-    private Button btnLogin;
-    @FXML
     private Label lblErrorMsg;
 
     private Scene registrationScene;
