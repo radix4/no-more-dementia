@@ -8,7 +8,7 @@ public class User {
     /**
      * Constructor
      *
-     * @param name of use
+     * @param name of user
      * @param email of user
      * @param password of user
      */

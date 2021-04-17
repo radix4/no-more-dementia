@@ -15,6 +15,8 @@ public class RegistrationController {
     @FXML
     private Text txtErrorMsg;
     @FXML
+    private Text txtSuccessMsg;
+    @FXML
     private TextField txtFdName;
     @FXML
     private TextField txtFdEmail;
@@ -58,7 +60,7 @@ public class RegistrationController {
 
         /* insert new user into the database */
         if(dbInstance.insertIntoUsersTable(newUser))
-            txtErrorMsg.setText("Create account success!");
+            txtSuccessMsg.setText("Create account success!\nGo to login screen to login.");
         else
             txtErrorMsg.setText("Email already exists!");
     }

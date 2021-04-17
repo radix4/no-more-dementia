@@ -106,6 +106,10 @@ public class DbController {
         }
     }
 
+    /**
+     * This main method is main used to test the database queries.
+     * @param args
+     */
     public static void main(String[] args) {
         DbController dbInstance = DbController.getSingleDBInstance();
 
