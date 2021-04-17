@@ -12,17 +12,11 @@ import java.sql.*;
 
 public class DbController {
     private static DbController singleDBInstance = new DbController();
-    private static Connection connection = null;
+    private Connection connection = null;
     public static final String JDBC_URL = "jdbc:sqlite::memory:";   /* in-memory */
-    private static final String DB_NAME = "users.db";
-    private static final String USERS_TABLE = "users_table";
-    private static final String COL_NAME = "name";
-    private static final String COL_EMAIL = "email";
-    private static final String COL_PASSWORD = "password";
-    public static final String CREATE_USERS_TABLE_STATEMENT = "create table " + USERS_TABLE + " (" +
-            COL_NAME + " text, " +
-            COL_EMAIL + " text primary key, " +
-            COL_PASSWORD + " text)";
+    public static final String JDBC_URL_2 = "jdbc:sqlite:./src/application/database/noMoreDementiaDB.db";   /* physical database */
+    private static final String CREATE_USERS_TABLE_STATEMENT = "create table users_table (name text, email text not null primary key, password text)";
+    private static final String INSERT_INTO_USERS_TABLE_SQL = "insert into users_table(name, email, password) values(?, ?, ?)";
 
     /** Private constructor to restrict creating new instances. */
     private DbController() {}
@@ -33,11 +27,12 @@ public class DbController {
     }
 
     /** This function makes a connection to the SQLite DB using the SQLite JDBC driver. */
-    public static void connect() {
+    public void connect() {
         try {
+            Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection(JDBC_URL);
-            System.out.println("Connection to SQLite has been established.");
-        } catch (SQLException e) {
+            System.out.println("Connection to SQLite success.");
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
@@ -45,11 +40,11 @@ public class DbController {
     /**
      * This function closes the connection to the database.
      */
-    public static void closeDB() {
+    public void closeDB() {
         try {
             if (connection != null) {
                 connection.close();
-                System.out.println("DB close successfully!");
+                System.out.println("DB close success");
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -60,21 +55,60 @@ public class DbController {
      * Create a new table in the in-memory database.
      * Bug: "DBNavigator" causes SQL statement to be unrecognized.
      * Fix: Disable/Uninstall DBNavigator.
+     *
+     * @param SqlStatement sql statement
      */
-    public static void createTable(String SqlStatement) {
-        try (Connection conn = DriverManager.getConnection(JDBC_URL);
-             Statement stmt = conn.createStatement()) {
-            stmt.execute(SqlStatement);
-            System.out.println("Create table successful: " + SqlStatement);
+    public void createTable(String SqlStatement) {
+        Statement statement = null;
+
+        try {
+            statement = connection.createStatement();
+            statement.execute(SqlStatement);
+            statement.close();
+            System.out.println("Create table success: " + SqlStatement);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public static void main(String[] args) {
-        connect();
-        createTable(CREATE_USERS_TABLE_STATEMENT);
 
-        closeDB();
+    /**
+     * Insert into users_table.
+     * Current issue: make email as primary key causes insert to fail.
+     *
+     * @param name
+     * @param email
+     * @param password
+     * @return
+     */
+    public void insertIntoUsersTable(String name, String email, String password) {
+        PreparedStatement ps = null;
+        try {
+            connection.setAutoCommit(false);
+            ps = this.connection.prepareStatement(INSERT_INTO_USERS_TABLE_SQL);
+            ps.setString(1, name);
+            ps.setString(2, email);
+            ps.setString(3, password);
+            ps.executeUpdate();
+            ps.close();
+            connection.commit();
+            System.out.println("Insert into users_table success.");
+        } catch (SQLException e) {
+            System.out.println("Insert error: " + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        DbController dbInstance = DbController.getSingleDBInstance();
+        dbInstance.connect();
+
+
+        dbInstance.createTable(CREATE_USERS_TABLE_STATEMENT);
+        dbInstance.insertIntoUsersTable("name", "email", "address");
+        dbInstance.insertIntoUsersTable("name1", "email1", "address1");
+        dbInstance.insertIntoUsersTable("name1", "email1", "address1");
+
+
+        dbInstance.closeDB();
     }
 }
