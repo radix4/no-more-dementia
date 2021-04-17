@@ -1,5 +1,7 @@
 package application.controllers;
 
+import application.models.User;
+
 import java.sql.*;
 
 /**
@@ -83,19 +85,16 @@ public class DbController {
      * Insert into users_table.
      * Current issue: make email as primary key causes insert to fail.
      *
-     * @param name
-     * @param email
-     * @param password
-     * @return
+     * @param user to insert into table
      */
-    public void insertIntoUsersTable(String name, String email, String password) {
+    public void insertIntoUsersTable(User user) {
         PreparedStatement ps = null;
         try {
             connection.setAutoCommit(false);
             ps = this.connection.prepareStatement(INSERT_INTO_USERS_TABLE_SQL);
-            ps.setString(1, name);
-            ps.setString(2, email);
-            ps.setString(3, password);
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
             ps.executeUpdate();
             ps.close();
             connection.commit();
@@ -108,9 +107,14 @@ public class DbController {
     public static void main(String[] args) {
         DbController dbInstance = DbController.getSingleDBInstance();
 
-        dbInstance.insertIntoUsersTable("name", "email", "address");
-        dbInstance.insertIntoUsersTable("name1", "email1", "address1");
-        dbInstance.insertIntoUsersTable("name1", "email1", "address1");
+        User user = new User("name", "email", "address");
+        User user1 = new User("name1", "email1", "address1");
+        User user2 = new User("name1", "email1", "address1");
+
+
+        dbInstance.insertIntoUsersTable(user);
+        dbInstance.insertIntoUsersTable(user1);
+        dbInstance.insertIntoUsersTable(user2); /* expect error: duplicate email */
 
 
         dbInstance.closeDB();

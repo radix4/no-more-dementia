@@ -3,6 +3,7 @@ package application;
 import application.controllers.DbController;
 import application.controllers.LoginController;
 import application.controllers.RegistrationController;
+import application.models.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -42,15 +43,24 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
+		/* instantiate db instance*/
 		DbController dbInstance = DbController.getSingleDBInstance();
 
-		dbInstance.insertIntoUsersTable("name", "email", "address");
-		dbInstance.insertIntoUsersTable("name1", "email1", "address1");
-		dbInstance.insertIntoUsersTable("name1", "email1", "address1");
+		User user = new User("name", "email", "address");
+		User user1 = new User("name1", "email1", "address1");
+		User user2 = new User("name1", "email1", "address1");
 
 
-		dbInstance.closeDB();
+		dbInstance.insertIntoUsersTable(user);
+		dbInstance.insertIntoUsersTable(user1);
+		dbInstance.insertIntoUsersTable(user2); /* expect error: duplicate email */
 
+
+		/* launch GUI */
 		launch(args);
+
+
+		/* close DB */
+		dbInstance.closeDB();
 	}
 }
