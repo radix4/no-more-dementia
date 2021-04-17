@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class RegistrationController {
+    private Scene loginScene;
 
     @FXML
     private Text txtErrorMsg;
@@ -25,8 +26,6 @@ public class RegistrationController {
     @FXML
     private TextField pwFdConfirmPassword;
 
-
-    private Scene loginScene;
 
     public void setLoginScene(Scene scene) {
         this.loginScene = scene;
@@ -59,10 +58,13 @@ public class RegistrationController {
         User newUser = new User(name, email, password);
 
         /* insert new user into the database */
-        if(dbInstance.insertIntoUsersTable(newUser))
+        if(dbInstance.insertIntoUsersTable(newUser)) {
+            txtErrorMsg.setText("");
             txtSuccessMsg.setText("Create account success!\nGo to login screen to login.");
-        else
+        } else {
+            txtSuccessMsg.setText("");
             txtErrorMsg.setText("Email already exists!");
+        }
     }
 
     /**

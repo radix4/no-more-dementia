@@ -106,6 +106,43 @@ public class DbController {
         }
     }
 
+
+    /**
+     * This function pulls all attributes from the db that matches 'email' attribute.
+     * The main purpose is to check whether the email exists in the db.
+     *
+     * @param email email provided in the login screen
+     * @return user if found, null if user doesn't exist in db
+     */
+    public User selectUserFromUsersTable(String email) {
+        User user = null;
+
+        Statement statement = null;
+        try {
+            connection.setAutoCommit(false);
+            statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select * from users_table where email=\"" + email +"\";");
+
+
+            String name = rs.getString("name");
+            String password = rs.getString("password");
+
+            User us = new User(name, email, password);
+            System.out.println(us);
+
+            rs.close();
+            statement.close();
+            connection.commit();
+            System.out.println("Select from users_table success.");
+
+            user = new User(name, email, password);
+            return user;
+        } catch (SQLException e) {
+            System.out.println("Select error: " + e.getMessage());
+            return null;
+        }
+    }
+
     /**
      * This main method is main used to test the database queries.
      * @param args
