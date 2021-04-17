@@ -18,8 +18,15 @@ public class DbController {
     private static final String CREATE_USERS_TABLE_STATEMENT = "create table users_table (name text, email text not null primary key, password text)";
     private static final String INSERT_INTO_USERS_TABLE_SQL = "insert into users_table(name, email, password) values(?, ?, ?)";
 
-    /** Private constructor to restrict creating new instances. */
-    private DbController() {}
+    /** Private constructor to restrict creating new instances.
+     * Upon instantiate, the instance:
+     * (1) connects to the db
+     * (2) creates the user_table
+     * */
+    private DbController() {
+        connect();
+        createTable(CREATE_USERS_TABLE_STATEMENT);
+    }
 
     /** Good old getter */
     public static DbController getSingleDBInstance() {
@@ -100,10 +107,7 @@ public class DbController {
 
     public static void main(String[] args) {
         DbController dbInstance = DbController.getSingleDBInstance();
-        dbInstance.connect();
 
-
-        dbInstance.createTable(CREATE_USERS_TABLE_STATEMENT);
         dbInstance.insertIntoUsersTable("name", "email", "address");
         dbInstance.insertIntoUsersTable("name1", "email1", "address1");
         dbInstance.insertIntoUsersTable("name1", "email1", "address1");

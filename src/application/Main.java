@@ -1,5 +1,6 @@
 package application;
 	
+import application.controllers.DbController;
 import application.controllers.LoginController;
 import application.controllers.RegistrationController;
 import javafx.application.Application;
@@ -41,6 +42,15 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
+		DbController dbInstance = DbController.getSingleDBInstance();
+
+		dbInstance.insertIntoUsersTable("name", "email", "address");
+		dbInstance.insertIntoUsersTable("name1", "email1", "address1");
+		dbInstance.insertIntoUsersTable("name1", "email1", "address1");
+
+
+		dbInstance.closeDB();
+
 		launch(args);
 	}
 }
