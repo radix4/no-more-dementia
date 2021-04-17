@@ -1,9 +1,11 @@
 package application.controllers;
 
+import application.models.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -12,6 +14,15 @@ public class RegistrationController {
 
     @FXML
     private Text txtErrorMsg;
+    @FXML
+    private TextField txtFdName;
+    @FXML
+    private TextField txtFdEmail;
+    @FXML
+    private TextField pwFdPassword;
+    @FXML
+    private TextField pwFdConfirmPassword;
+
 
     private Scene loginScene;
 
@@ -24,7 +35,32 @@ public class RegistrationController {
      * @param actionEvent
      */
     public void handleBtnRegister(ActionEvent actionEvent) {
-        txtErrorMsg.setText("Error! Please fill out all fields.");
+        DbController dbInstance = DbController.getSingleDBInstance();
+
+        String name = txtFdName.getText();
+        String email = txtFdEmail.getText();
+        String password = pwFdPassword.getText();
+        String confirmPassword = pwFdConfirmPassword.getText();
+
+        /* empty fields = error */
+        if (name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            txtErrorMsg.setText("Error! Please fill out all fields.");
+            return;
+        }
+
+        /* passwords don't match */
+        if (!password.equals(confirmPassword)) {
+            txtErrorMsg.setText("Error! Passwords don't match.");
+            return;
+        }
+
+        User newUser = new User(name, email, password);
+
+        /* insert new user into the database */
+        if(dbInstance.insertIntoUsersTable(newUser))
+            txtErrorMsg.setText("Create account success!");
+        else
+            txtErrorMsg.setText("Email already exists!");
     }
 
     /**

@@ -87,7 +87,7 @@ public class DbController {
      *
      * @param user to insert into table
      */
-    public void insertIntoUsersTable(User user) {
+    public boolean insertIntoUsersTable(User user) {
         PreparedStatement ps = null;
         try {
             connection.setAutoCommit(false);
@@ -99,8 +99,10 @@ public class DbController {
             ps.close();
             connection.commit();
             System.out.println("Insert into users_table success.");
+            return true;
         } catch (SQLException e) {
             System.out.println("Insert error: " + e.getMessage());
+            return false;
         }
     }
 
