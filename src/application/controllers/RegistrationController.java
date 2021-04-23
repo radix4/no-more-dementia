@@ -55,7 +55,7 @@ public class RegistrationController {
             return;
         }
 
-        User newUser = new User(name, email, password);
+        User newUser = new User(name, email, password, null);
 
         /* insert new user into the database */
         if(dbInstance.insertIntoUsersTable(newUser)) {

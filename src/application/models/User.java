@@ -4,18 +4,29 @@ public class User {
     private String name;
     private String email;
     private String password;
+    private int[] topScores;
+    
 
-    /**
+    public int[] getTopScores() {
+		return topScores;
+	}
+
+	public void setTopScores(int[] topScores) {
+		this.topScores = topScores;
+	}
+
+	/**
      * Constructor
      *
      * @param name of user
      * @param email of user
      * @param password of user
      */
-    public User(String name, String email, String password) {
+    public User(String name, String email, String password, int[] scores) {
         this.name = name;
         this.email = email;
         this.password = password;
+        topScores = scores;
     }
 
     /** ===== Getters and setters ===== */

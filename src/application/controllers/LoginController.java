@@ -14,6 +14,10 @@ import javafx.stage.Stage;
 
 public class LoginController {
     private Scene registrationScene;
+    
+    private Scene gameScene;
+    
+    private GameController gameController;
 
     @FXML
     private Label lblErrorMsg;
@@ -26,6 +30,10 @@ public class LoginController {
 
     public void setRegistrationScene(Scene scene) {
         this.registrationScene = scene;
+    }
+    
+    public void setGameScene(Scene scene) {
+    	this.gameScene = scene;
     }
 
 
@@ -46,6 +54,7 @@ public class LoginController {
         DbController dbInstance = DbController.getSingleDBInstance();
 
         currentUser = dbInstance.selectUserFromUsersTable(email);
+        
 
         /* case where:
         * 1) email doesn't exist in db
@@ -54,13 +63,17 @@ public class LoginController {
             lblErrorMsg.setText("Invalid login. Please try again.");
             return;
         }
-
-        /* ===== successfully loggin =====*/
-        lblErrorMsg.setText("Login success.");
-        System.out.println(currentUser);
+        
+        loginTxtFEmail.setText("");
+        loginPassFPassword.setText("");
+        
 
         // TODO: switch to home/play screen
-
+        gameController.setUser(currentUser);
+        gameController.setTopScoreLabel();
+        gameController.startNewGame(9);
+        Stage primaryStage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setScene(gameScene);
     }
 
     /**
@@ -71,4 +84,8 @@ public class LoginController {
         Stage primaryStage = (Stage) ((Node)mouseEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(registrationScene);
     }
+
+	public void setGameController(GameController gamePaneController) {
+		this.gameController = gamePaneController;
+	}
 }

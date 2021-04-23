@@ -17,8 +17,10 @@ public class DbController {
     private Connection connection = null;
     public static final String JDBC_URL = "jdbc:sqlite::memory:";   /* in-memory */
     public static final String JDBC_URL_2 = "jdbc:sqlite:./src/application/database/noMoreDementiaDB.db";   /* physical database */
-    private static final String CREATE_USERS_TABLE_STATEMENT = "create table users_table (name text, email text not null primary key, password text)";
-    private static final String INSERT_INTO_USERS_TABLE_SQL = "insert into users_table(name, email, password) values(?, ?, ?)";
+    private static final String CREATE_USERS_TABLE_STATEMENT = "create table users_table (name text, email text not null primary key, password text, topScore1 integer, topScore2 integer, topScore3 integer, topScore4 integer, topScore5 integer)";
+    private static final String INSERT_INTO_USERS_TABLE_SQL = "insert into users_table(name, email, password, topScore1, topScore2, topScore3, topScore4, topScore5) values(?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String UPDATE_SCORES_INTO_USER_TABLE_SQL = "update users_table set topScore1 = ?, topScore2 = ?, topScore3 = ?, topScore4 = ?, topScore5 = ? where email = ?";
+    
 
     /** Private constructor to restrict creating new instances.
      * Upon instantiate, the instance:
@@ -39,7 +41,7 @@ public class DbController {
     public void connect() {
         try {
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection(JDBC_URL);
+            connection = DriverManager.getConnection(JDBC_URL_2);
             System.out.println("Connection to SQLite success.");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -95,6 +97,11 @@ public class DbController {
             ps.setString(1, user.getName());
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPassword());
+            
+            for(int i = 4; i <= 8 ; i++) {
+            	ps.setInt(i, 0);
+            }
+            
             ps.executeUpdate();
             ps.close();
             connection.commit();
@@ -105,6 +112,32 @@ public class DbController {
             return false;
         }
     }
+    
+    /**
+     * Insert scores into users_table.
+     * 
+     * @param scores to insert into table for a user
+     */
+    public boolean updateScoresIntoUsersTable(User user, int[] scores) {
+        PreparedStatement ps = null;
+        try {
+            connection.setAutoCommit(false);
+            ps = this.connection.prepareStatement(UPDATE_SCORES_INTO_USER_TABLE_SQL);
+            for(int i = 0; i <= 4; i++) {
+            	ps.setInt(i + 1, scores[i]);
+            }
+            ps.setString(6, user.getEmail());
+            ps.executeUpdate();
+            ps.close();
+            connection.commit();
+            System.out.println("Insert score into users_table success.");
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Insert error: " + e.getMessage());
+            return false;
+        }
+    }
+    
 
 
     /**
@@ -127,7 +160,11 @@ public class DbController {
             String name = rs.getString("name");
             String password = rs.getString("password");
 
-            User us = new User(name, email, password);
+            int[] scores = new int[5];
+            for(int i = 0; i <= 4 ; i++) {
+            	scores[i] = rs.getInt("topScore" + (i + 1));
+            }
+            User us = new User(name, email, password, scores);
             System.out.println(us);
 
             rs.close();
@@ -135,8 +172,8 @@ public class DbController {
             connection.commit();
             System.out.println("Select from users_table success.");
 
-            user = new User(name, email, password);
-            return user;
+           // user = new User(name, email, password);
+            return us;
         } catch (SQLException e) {
             System.out.println("Select error: " + e.getMessage());
             return null;
@@ -150,9 +187,9 @@ public class DbController {
     public static void main(String[] args) {
         DbController dbInstance = DbController.getSingleDBInstance();
 
-        User user = new User("name", "email", "address");
-        User user1 = new User("name1", "email1", "address1");
-        User user2 = new User("name1", "email1", "address1");
+        User user = new User("name", "email", "address", null);
+        User user1 = new User("name1", "email1", "address1", null);
+        User user2 = new User("name2", "email2", "address2", null);
 
 
         dbInstance.insertIntoUsersTable(user);
