@@ -2,6 +2,7 @@ package application;
 	
 import application.controllers.DbController;
 import application.controllers.GameController;
+import application.controllers.LeaderboardController;
 import application.controllers.LoginController;
 import application.controllers.RegistrationController;
 import application.models.User;
@@ -30,6 +31,10 @@ public class Main extends Application {
 			Parent gamePane = gamePaneLoader.load();
 			Scene gameScene = new Scene(gamePane,1000,700);
 			
+			FXMLLoader leaderboardLoader = new FXMLLoader(getClass().getResource("layout/leaderboard.fxml"));
+			Parent leaderboardPane = leaderboardLoader.load();
+			Scene leaderboardScene = new Scene(leaderboardPane,1000,700);
+			
 			/* Inject login scene to game scene */
 			GameController gamePaneController = (GameController)  gamePaneLoader.getController();
 			gamePaneController.setLoginScene(loginScene);
@@ -46,6 +51,13 @@ public class Main extends Application {
 			/* Inject login scene to registration scene */
 			RegistrationController registrationPaneController = (RegistrationController)  registrationPaneLoader.getController();
 			registrationPaneController.setLoginScene(loginScene);
+			
+			/* Inject leaderboard scene to game scene */
+			gamePaneController.setLeaderboardScene(leaderboardScene);
+			
+			/* Inject game scene to leaderboard scene */
+			LeaderboardController leaderboardPaneController = (LeaderboardController) leaderboardLoader.getController();
+			leaderboardPaneController.setGameScene(gameScene);
 
 			/* Login scene is the initial scene */
 			primaryStage.setScene(loginScene);

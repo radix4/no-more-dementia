@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 public class GameController {
 	private Scene loginScene;
+	private Scene leaderboardScene;
 	
 	private Matrix matrix;
 	
@@ -46,6 +47,10 @@ public class GameController {
 	//injection
 	public void setLoginScene(Scene loginScene) {
 		this.loginScene = loginScene;
+	}
+	
+	public void setLeaderboardScene(Scene leaderboardScene) {
+		this.leaderboardScene = leaderboardScene;
 	}
 	
 	public void setUser(User user) {
@@ -169,5 +174,11 @@ public class GameController {
 			break;
 		}
 		
+	}
+	
+	// Method to change the scene to leaderboard
+	public void viewLeaderboard(ActionEvent event) {
+		Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        primaryStage.setScene(leaderboardScene);
 	}
 }
