@@ -52,7 +52,7 @@ public class Matrix {
 	public ImageView createImage(int count) {
 		System.out.println("Create Image");
 		try {
-			Image image = new Image(new FileInputStream("C:\\Users\\abdul\\eclipse-workspace\\no-more-dementia\\src\\application\\images\\image" + count + ".png"));
+			Image image = new Image(new FileInputStream("./src/application/images/image" + count + ".png"));
 			
 			//Creating the image view
 		    ImageView imageView = new ImageView();
