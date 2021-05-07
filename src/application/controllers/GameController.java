@@ -18,6 +18,9 @@ import javafx.stage.Stage;
 public class GameController {
 	private Scene loginScene;
 	private Scene leaderboardScene;
+	private Scene instructionsScene;
+	
+	private LeaderboardController leaderboardPaneController;
 	
 	private Matrix matrix;
 	
@@ -53,6 +56,16 @@ public class GameController {
 		this.leaderboardScene = leaderboardScene;
 	}
 	
+	public void setInstructionsScene(Scene instructionsScene) {
+		this.instructionsScene = instructionsScene;
+		
+	}
+	
+	public void setLeaderboardController(LeaderboardController leaderboardPaneController) {
+		this.leaderboardPaneController = leaderboardPaneController;
+		
+	}
+	
 	public void setUser(User user) {
 		this.user = user;
 		helloLabel.setText("Hello, " + user.getName());
@@ -67,7 +80,7 @@ public class GameController {
 	
 	//pre-condition: called only after a game has ended
 	//adds score of game to leaderboards if in top 5
-	private void updateTopScores() {
+	public void updateTopScores() {
 		int currentScore = matrix.getCurrentScore();
 		int[] top5scores = user.getTopScores();
 		int i;
@@ -140,6 +153,7 @@ public class GameController {
 				setCurrentScoreLabel();
 				updateTopScores();
 				setTopScoreLabel();
+				leaderboardPaneController.displayTopFiveScores();
 				//display incremented score after winning click
 				matrix.removeImageHandlers();
 			} else {
@@ -152,6 +166,7 @@ public class GameController {
 			gameResult.setText("YOU LOST!");
 			updateTopScores();
 			setTopScoreLabel();
+			leaderboardPaneController.displayTopFiveScores();
 			matrix.removeImageHandlers();
 		}
 	}
@@ -181,4 +196,12 @@ public class GameController {
 		Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         primaryStage.setScene(leaderboardScene);
 	}
+	
+	// Method to change the scene to instructions
+	public void viewInstructions(ActionEvent event) {
+		Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+	    primaryStage.setScene(instructionsScene);
+	}
+
+	
 }

@@ -17,7 +17,11 @@ public class LoginController {
     
     private Scene gameScene;
     
+    private Scene leaderboardScene; 
+    
     private GameController gameController;
+    
+    private LeaderboardController leaderboardPaneController;
 
     @FXML
     private Label lblErrorMsg;
@@ -35,6 +39,11 @@ public class LoginController {
     public void setGameScene(Scene scene) {
     	this.gameScene = scene;
     }
+    
+    public void setLeaderboardScene(Scene leaderboardScene) {
+		this.leaderboardScene = leaderboardScene;
+		
+	}
 
 
     /**
@@ -74,6 +83,9 @@ public class LoginController {
         gameController.startNewGame(9);
         Stage primaryStage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(gameScene);
+        
+        leaderboardPaneController.setUser(currentUser);
+        leaderboardPaneController.displayTopFiveScores();
     }
 
     /**
@@ -88,4 +100,10 @@ public class LoginController {
 	public void setGameController(GameController gamePaneController) {
 		this.gameController = gamePaneController;
 	}
+
+	public void setLeaderboardController(LeaderboardController leaderboardPaneController) {
+		this.leaderboardPaneController = leaderboardPaneController;
+		
+	}
+	
 }

@@ -17,7 +17,7 @@
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="151.0" layoutY="524.0" mnemonicParsing="false" style="-fx-background-color: #3379f2;" text="Logout" textFill="WHITE">
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="151.0" layoutY="524.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: #3379f2;" text="Logout" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
@@ -37,26 +37,61 @@
                <padding>
                   <Insets bottom="50.0" left="10.0" right="10.0" top="10.0" />
                </padding>
+               <children>
+                  <Text fx:id="scoreLbl4" strokeType="OUTSIDE" strokeWidth="0.0" text="Score 1:" wrappingWidth="107.0">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                  </Text>
+               </children>
             </HBox>
             <HBox layoutX="57.0" layoutY="247.0" prefHeight="60.0" prefWidth="484.0" spacing="100.0" style="-fx-background-color: #9ee6bd;">
                <padding>
                   <Insets bottom="50.0" left="10.0" right="10.0" top="10.0" />
                </padding>
+               <children>
+                  <Text fx:id="scoreLbl3" strokeType="OUTSIDE" strokeWidth="0.0" text="Score 2:" wrappingWidth="107.0">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                  </Text>
+               </children>
             </HBox>
             <HBox layoutX="57.0" layoutY="347.0" prefHeight="60.0" prefWidth="484.0" spacing="100.0" style="-fx-background-color: edabb8;">
                <padding>
                   <Insets bottom="50.0" left="10.0" right="10.0" top="10.0" />
                </padding>
+               <children>
+                  <Text fx:id="scoreLbl2" strokeType="OUTSIDE" strokeWidth="0.0" text="Score 3:" wrappingWidth="107.0">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                  </Text>
+               </children>
             </HBox>
             <HBox layoutX="57.0" layoutY="447.0" prefHeight="60.0" prefWidth="484.0" spacing="100.0" style="-fx-background-color: #f0c6a5;">
                <padding>
-                  <Insets bottom="50.0" top="10.0" />
+                  <Insets bottom="50.0" left="10.0" right="10.0" top="10.0" />
                </padding>
+               <children>
+                  <Text fx:id="scoreLbl1" strokeType="OUTSIDE" strokeWidth="0.0" text="Score 4:" wrappingWidth="107.0">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                  </Text>
+               </children>
             </HBox>
             <HBox layoutX="57.0" layoutY="547.0" prefHeight="60.0" prefWidth="484.0" spacing="100.0" style="-fx-background-color: #aae1e6;">
                <padding>
                   <Insets bottom="50.0" left="10.0" right="10.0" top="10.0" />
                </padding>
+               <children>
+                  <Text fx:id="scoreLbl0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score 5:" wrappingWidth="107.0">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                  </Text>
+               </children>
             </HBox>
             <Text fill="#808080" layoutX="161.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top 5 Scores">
                <font>

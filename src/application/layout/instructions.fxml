@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.InstructionsController">
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="GREY" layoutX="336.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How to Play" wrappingWidth="327.740234375">
+               <font>
+                  <Font size="62.0" />
+               </font>
+            </Text>
+            <TextArea editable="false" layoutX="27.0" layoutY="119.0" prefHeight="465.0" prefWidth="946.0" text="The goal of the game is to remember all of the images you have already clicked and click a new image every round. &#10;&#10;For example, lets say first you click the apple, then the black berries. Well, on the third round you would have to click on an image that is not&#10;the apple or black berries, like the banana for example. If you manage to click all the different images for the given difficulty you are playing&#10;on, then you win! &#10;&#10;The number of images you have to click to win depends on the difficulty you are playing on:&#10;&#10;Easy =&gt; 9 different images&#10;&#10;Medium =&gt; 16 different images&#10;&#10;Hard =&gt; 25 different images&#10;&#10;Your top 5 scores will be displayed on the leaderboard page.&#10;&#10;Have fun and improve your memory along the way!">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextArea>
+            <Button layoutX="404.0" layoutY="603.0" mnemonicParsing="false" onAction="#backToPlay" prefHeight="68.0" prefWidth="192.0" style="-fx-background-color: #3379f2;" text="Back to Play" textFill="WHITE">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

@@ -2,6 +2,7 @@ package application;
 	
 import application.controllers.DbController;
 import application.controllers.GameController;
+import application.controllers.InstructionsController;
 import application.controllers.LeaderboardController;
 import application.controllers.LoginController;
 import application.controllers.RegistrationController;
@@ -35,6 +36,10 @@ public class Main extends Application {
 			Parent leaderboardPane = leaderboardLoader.load();
 			Scene leaderboardScene = new Scene(leaderboardPane,1000,700);
 			
+			FXMLLoader instructionsPaneLoader = new FXMLLoader(getClass().getResource("layout/instructions.fxml"));
+			Parent instructionsPane = instructionsPaneLoader.load();
+			Scene instructionsScene = new Scene(instructionsPane,1000,700);
+			
 			/* Inject login scene to game scene */
 			GameController gamePaneController = (GameController)  gamePaneLoader.getController();
 			gamePaneController.setLoginScene(loginScene);
@@ -52,12 +57,24 @@ public class Main extends Application {
 			RegistrationController registrationPaneController = (RegistrationController)  registrationPaneLoader.getController();
 			registrationPaneController.setLoginScene(loginScene);
 			
+			LeaderboardController leaderboardPaneController = (LeaderboardController) leaderboardLoader.getController();
+			
 			/* Inject leaderboard scene to game scene */
+			gamePaneController.setLeaderboardController(leaderboardPaneController);
 			gamePaneController.setLeaderboardScene(leaderboardScene);
 			
 			/* Inject game scene to leaderboard scene */
-			LeaderboardController leaderboardPaneController = (LeaderboardController) leaderboardLoader.getController();
+			
 			leaderboardPaneController.setGameScene(gameScene);
+			
+			leaderboardPaneController.setLoginScene(loginScene);
+			loginPaneController.setLeaderboardController(leaderboardPaneController);
+			loginPaneController.setLeaderboardScene(leaderboardScene);
+			
+			InstructionsController instructionsPaneController = (InstructionsController) instructionsPaneLoader.getController();
+			instructionsPaneController.setGameScene(gameScene);
+			gamePaneController.setInstructionsScene(instructionsScene);
+			
 
 			/* Login scene is the initial scene */
 			primaryStage.setScene(loginScene);
