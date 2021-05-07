@@ -16,7 +16,6 @@ public class DbController {
     private static DbController singleDBInstance = new DbController();
     private Connection connection = null;
     public static final String JDBC_URL = "jdbc:sqlite::memory:";   /* in-memory */
-    public static final String JDBC_URL_2 = "jdbc:sqlite:./src/application/database/noMoreDementiaDB.db";   /* physical database */
     private static final String CREATE_USERS_TABLE_STATEMENT = "create table users_table (name text, email text not null primary key, password text, topScore1 integer, topScore2 integer, topScore3 integer, topScore4 integer, topScore5 integer)";
     private static final String INSERT_INTO_USERS_TABLE_SQL = "insert into users_table(name, email, password, topScore1, topScore2, topScore3, topScore4, topScore5) values(?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_SCORES_INTO_USER_TABLE_SQL = "update users_table set topScore1 = ?, topScore2 = ?, topScore3 = ?, topScore4 = ?, topScore5 = ? where email = ?";
@@ -41,7 +40,7 @@ public class DbController {
     public void connect() {
         try {
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection(JDBC_URL_2);
+            connection = DriverManager.getConnection(JDBC_URL);
             System.out.println("Connection to SQLite success.");
         } catch (Exception e) {
             System.out.println(e.getMessage());

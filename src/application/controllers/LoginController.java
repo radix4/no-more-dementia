@@ -72,7 +72,8 @@ public class LoginController {
             lblErrorMsg.setText("Invalid login. Please try again.");
             return;
         }
-        
+
+        lblErrorMsg.setText("");
         loginTxtFEmail.setText("");
         loginPassFPassword.setText("");
         
